@@ -37,6 +37,14 @@ spec:
             - name: http
               containerPort: 7777
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /auth/login
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /auth/login
+              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
